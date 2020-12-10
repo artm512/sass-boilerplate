@@ -1,3 +1,4 @@
+const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // Sass(SCSSファイル)をwebpackで取り込みつつ、cssファイルとして出力するプラグイン
 
 // [定数] webpack の出力オプションを指定
@@ -7,6 +8,9 @@ const MODE = "development";
 // ソースマップの利用有無(productionのときはソースマップを利用しない)
 const enabledSourceMap = MODE === "development";
 
+// webpack-dev-serverを立ち上げた時のドキュメントルート
+const outputPath = path.resolve(__dirname, 'pages');
+
 module.exports = {
   // モード値を production に設定すると最適化された状態で、
   // development に設定するとソースマップ有効でJSファイルが出力される
@@ -14,7 +18,7 @@ module.exports = {
 
   // ローカル開発用環境を立ち上げる
   devServer: {
-    contentBase: "dist",
+    contentBase: outputPath,
     open: true // 実行時にブラウザが自動的に localhost を開く
   },
 
